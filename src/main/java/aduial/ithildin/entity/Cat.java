@@ -1,26 +1,29 @@
 package aduial.ithildin.entity;
 
+import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "cat")
+@DatabaseTable(tableName = "CAT")
 public class Cat {
 
-  @Id
-  private Long id;
+  @DatabaseField(id = true)
+  private Integer id;
+  @DatabaseField
   private String label;
-  private Long parentId;
+  @DatabaseField
+  private Integer parentId;
 
   protected Cat() {
   }
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -34,11 +37,11 @@ public class Cat {
   }
 
 
-  public Long getParentId() {
+  public Integer getParentId() {
     return parentId;
   }
 
-  public void setParentId(Long parentId) {
+  public void setParentId(Integer parentId) {
     this.parentId = parentId;
   }
 

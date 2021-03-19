@@ -1,29 +1,35 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "classview")
+@DatabaseTable(tableName = "CLASSVIEW")
 public class ClassView{
 
-  @Id
-  private Long entryid;
+  @DatabaseField
+  private Integer entryId;
+  @DatabaseField
   private String mark;
-  private Long lgorder;
+  @DatabaseField
+  private Integer lgorder;
+  @DatabaseField
   private String grammartxt;
+  @DatabaseField
   private String grammartypetxt;
-  private Long grammarid;
+  @DatabaseField
+  private Integer grammarid;
 
   protected ClassView() {}
 
-  public Long getEntryid() {
-    return entryid;
+  public Integer getEntryid() {
+    return entryId;
   }
 
-  public void setEntryid(Long entryid) {
-    this.entryid = entryid;
+  public void setEntryid(Integer entryId) {
+    this.entryId = entryId;
   }
 
 
@@ -36,11 +42,11 @@ public class ClassView{
   }
 
 
-  public Long getLgorder() {
+  public Integer getLgorder() {
     return lgorder;
   }
 
-  public void setLgorder(Long lgorder) {
+  public void setLgorder(Integer lgorder) {
     this.lgorder = lgorder;
   }
 
@@ -63,11 +69,11 @@ public class ClassView{
   }
 
 
-  public Long getGrammarid() {
+  public Integer getGrammarid() {
     return grammarid;
   }
 
-  public void setGrammarid(Long grammarid) {
+  public void setGrammarid(Integer grammarid) {
     this.grammarid = grammarid;
   }
 

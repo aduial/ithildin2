@@ -1,27 +1,32 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "refcognateview")
+@DatabaseTable(tableName = "REFCOGNATEVIEW")
 public class RefCognateView{
 
-  @Id
-  private Long   entryId;
+  @DatabaseField
+  private Integer   entryId;
+  @DatabaseField
   private String lang;
+  @DatabaseField
   private String form;
+  @DatabaseField
   private String gloss;
+  @DatabaseField
   private String sources;
 
   protected RefCognateView() {}
 
-  public Long getEntryId() {
+  public Integer getEntryId() {
     return entryId;
   }
 
-  public void setEntryId(Long entryidfrom) {
+  public void setEntryId(Integer entryidfrom) {
     this.entryId = entryidfrom;
   }
 

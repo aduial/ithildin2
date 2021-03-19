@@ -1,31 +1,40 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "simplexicon")
+@DatabaseTable(tableName = "SIMPLEXICON")
 public class SimpLexicon{
 
-  @Id
-  private Long   entryId;
+  @DatabaseField
+  private Integer   entryId;
+  @DatabaseField
   private String mark;
+  @DatabaseField
   private String form;
-  private Long languageId;
+  @DatabaseField
+  private Integer languageId;
+  @DatabaseField
   private String languagename;
+  @DatabaseField
   private String gloss;
+  @DatabaseField
   private String cat;
+  @DatabaseField
   private String stem;
-  private Long entrytypeId;
+  @DatabaseField
+  private Integer entrytypeId;
 
   protected SimpLexicon() {}
 
-  public Long getEntryId() {
+  public Integer getEntryId() {
     return entryId;
   }
 
-  public void setEntryId(Long id) {
+  public void setEntryId(Integer id) {
     this.entryId = id;
   }
 
@@ -48,11 +57,11 @@ public class SimpLexicon{
   }
 
 
-  public Long getLanguageId() {
+  public Integer getLanguageId() {
     return languageId;
   }
 
-  public void setLanguageId(Long languageId) {
+  public void setLanguageId(Integer languageId) {
     this.languageId = languageId;
   }
 
@@ -93,11 +102,11 @@ public class SimpLexicon{
   }
 
 
-  public Long getEntrytypeId() {
+  public Integer getEntrytypeId() {
     return entrytypeId;
   }
 
-  public void setEntrytypeId(Long entrytypeId) {
+  public void setEntrytypeId(Integer entrytypeId) {
     this.entrytypeId = entrytypeId;
   }
 

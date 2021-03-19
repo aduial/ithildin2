@@ -1,39 +1,46 @@
 package aduial.ithildin.entity;
 
+import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "changeview")
+@DatabaseTable(tableName = "CHANGEVIEW")
 public class ChangeView{
 
-  @Id
-  private Long refidfrom;
-  private Long lgorder;
+  @DatabaseField
+  private Integer refidfrom;
+  @DatabaseField
+  private Integer lgorder;
+  @DatabaseField
   private String formtxt;
+  @DatabaseField
   private String sourcename;
+  @DatabaseField
   private String sourceprefix;
+  @DatabaseField
   private String sourcestring;
+  @DatabaseField
   private String sourcetypetxt;
 
   protected ChangeView() {
   }
 
-  public Long getRefidfrom() {
+  public Integer getRefidfrom() {
     return refidfrom;
   }
 
-  public void setRefidfrom(Long refidfrom) {
+  public void setRefidfrom(Integer refidfrom) {
     this.refidfrom = refidfrom;
   }
 
 
-  public Long getLgorder() {
+  public Integer getLgorder() {
     return lgorder;
   }
 
-  public void setLgorder(Long lgorder) {
+  public void setLgorder(Integer lgorder) {
     this.lgorder = lgorder;
   }
 

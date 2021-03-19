@@ -1,38 +1,51 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
 
-@DatabaseTable(tableName = "lexicon")
+@DatabaseTable(tableName = "LEXICON")
 public class Lexicon {
 
-  @Id
-  private Long entryId;
+  @DatabaseField
+  private Integer entryId;
+  @DatabaseField
   private String form;
+  @DatabaseField
   private String langMnemonic;
+  @DatabaseField
   private String langName;
+  @DatabaseField
   private String gloss;
+  @DatabaseField
   private String cat;
+  @DatabaseField
   private String tengwar;
+  @DatabaseField
   private String mark;
+  @DatabaseField
   private String eldamoPageid;
+  @DatabaseField
   private String orderfield;
-
-  private Long parentId;
-  private Long ordering;
-  private Long entrytypeId;
+  @DatabaseField
+  private Integer parentId;
+  @DatabaseField
+  private Integer ordering;
+  @DatabaseField
+  private Integer entrytypeId;
+  @DatabaseField
   private String entryType;
 
   protected Lexicon() {}
 
-  public Long getEntryId() {
+  public Integer getEntryId() {
     return entryId;
   }
 
-  public void setEntryId(Long id) {
+  public void setEntryId(Integer id) {
     this.entryId = id;
   }
 
@@ -118,29 +131,29 @@ public class Lexicon {
   }
 
 
-  public Long getParentId() {
+  public Integer getParentId() {
     return parentId;
   }
 
-  public void setParentId(Long parentId) {
+  public void setParentId(Integer parentId) {
     this.parentId = parentId;
   }
 
 
-  public Long getOrdering() {
+  public Integer getOrdering() {
     return ordering;
   }
 
-  public void setOrdering(Long ordering) {
+  public void setOrdering(Integer ordering) {
     this.ordering = ordering;
   }
 
 
-  public Long getEntrytypeId() {
+  public Integer getEntrytypeId() {
     return entrytypeId;
   }
 
-  public void setEntrytypeId(Long entrytypeId) {
+  public void setEntrytypeId(Integer entrytypeId) {
     this.entrytypeId = entrytypeId;
   }
 

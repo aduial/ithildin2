@@ -1,37 +1,43 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "inflectview")
+@DatabaseTable(tableName = "INFLECTVIEW")
 public class InflectView{
 
-  @Id
-  private Long entryidfrom;
-  private Long refidfrom;
+  @DatabaseField
+  private Integer entryidfrom;
+  @DatabaseField
+  private Integer refidfrom;
+  @DatabaseField
   private String formtxt;
-  private Long lgorder;
+  @DatabaseField
+  private Integer lgorder;
+  @DatabaseField
   private String inflection;
+  @DatabaseField
   private String inflecttypetxt;
 
   protected InflectView() {}
 
-  public Long getEntryidfrom() {
+  public Integer getEntryidfrom() {
     return entryidfrom;
   }
 
-  public void setEntryidfrom(Long entryidfrom) {
+  public void setEntryidfrom(Integer entryidfrom) {
     this.entryidfrom = entryidfrom;
   }
 
 
-  public Long getRefidfrom() {
+  public Integer getRefidfrom() {
     return refidfrom;
   }
 
-  public void setRefidfrom(Long refidfrom) {
+  public void setRefidfrom(Integer refidfrom) {
     this.refidfrom = refidfrom;
   }
 
@@ -45,11 +51,11 @@ public class InflectView{
   }
 
 
-  public Long getLgorder() {
+  public Integer getLgorder() {
     return lgorder;
   }
 
-  public void setLgorder(Long lgorder) {
+  public void setLgorder(Integer lgorder) {
     this.lgorder = lgorder;
   }
 

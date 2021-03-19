@@ -1,34 +1,37 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "gloss")
+@DatabaseTable(tableName = "GLOSS")
 public class Gloss {
 
-  @Id
-  private Long id;
-  private Long languageId;
+  @DatabaseField(id = true)
+  private Integer id;
+  @DatabaseField
+  private Integer languageId;
+  @DatabaseField
   private String txt;
 
   protected Gloss() {}
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public Long getLanguageId() {
+  public Integer getLanguageId() {
     return languageId;
   }
 
-  public void setLanguageId(Long languageId) {
+  public void setLanguageId(Integer languageId) {
     this.languageId = languageId;
   }
 

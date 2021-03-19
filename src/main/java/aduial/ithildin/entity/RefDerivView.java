@@ -1,26 +1,30 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "refderivview")
+@DatabaseTable(tableName = "REFDERIVVIEW")
 public class RefDerivView{
 
-  @Id
-  private Long entryId;
+  @DatabaseField
+  private Integer entryId;
+  @DatabaseField
   private String form;
+  @DatabaseField
   private String glosses;
+  @DatabaseField
   private String sources;
 
   protected RefDerivView() {}
 
-  public Long getEntryidfrom() {
+  public Integer getEntryidfrom() {
     return entryId;
   }
 
-  public void setEntryidfrom(Long entryidfrom) {
+  public void setEntryidfrom(Integer entryidfrom) {
     this.entryId = entryId;
   }
 

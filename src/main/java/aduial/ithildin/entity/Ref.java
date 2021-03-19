@@ -1,81 +1,94 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
 
-@DatabaseTable(tableName = "ref")
+@DatabaseTable(tableName = "REF")
 public class Ref {
 
-  @Id
-  private Long id;
-  private Long entryId;
-  private Long formId;
-  private Long glossId;
-  private Long languageId;
-  private Long sourceId;
+  @DatabaseField(id = true)
+  private Integer id;
+  @DatabaseField
+  private Integer entryId;
+  @DatabaseField
+  private Integer formId;
+  @DatabaseField
+  private Integer glossId;
+  @DatabaseField
+  private Integer languageId;
+  @DatabaseField
+  private Integer sourceId;
+  @DatabaseField
   private String mark;
-  private Long ruleFromformId;
-  private Long ruleRlformId;
-  private Long ruleRuleformId;
-  private Long ordering;
-  private Long entrytypeId;
+  @DatabaseField
+  private Integer ruleFromformId;
+  @DatabaseField
+  private Integer ruleRlformId;
+  @DatabaseField
+  private Integer ruleRuleformId;
+  @DatabaseField
+  private Integer ordering;
+  @DatabaseField
+  private Integer entrytypeId;
+  @DatabaseField
   private String source;
 
   protected Ref() {}
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public Long getEntryId() {
+  public Integer getEntryId() {
     return entryId;
   }
 
-  public void setEntryId(Long entryId) {
+  public void setEntryId(Integer entryId) {
     this.entryId = entryId;
   }
 
 
-  public Long getFormId() {
+  public Integer getFormId() {
     return formId;
   }
 
-  public void setFormId(Long formId) {
+  public void setFormId(Integer formId) {
     this.formId = formId;
   }
 
 
-  public Long getGlossId() {
+  public Integer getGlossId() {
     return glossId;
   }
 
-  public void setGlossId(Long glossId) {
+  public void setGlossId(Integer glossId) {
     this.glossId = glossId;
   }
 
 
-  public Long getLanguageId() {
+  public Integer getLanguageId() {
     return languageId;
   }
 
-  public void setLanguageId(Long languageId) {
+  public void setLanguageId(Integer languageId) {
     this.languageId = languageId;
   }
 
 
-  public Long getSourceId() {
+  public Integer getSourceId() {
     return sourceId;
   }
 
-  public void setSourceId(Long sourceId) {
+  public void setSourceId(Integer sourceId) {
     this.sourceId = sourceId;
   }
 
@@ -89,47 +102,47 @@ public class Ref {
   }
 
 
-  public Long getRuleFromformId() {
+  public Integer getRuleFromformId() {
     return ruleFromformId;
   }
 
-  public void setRuleFromformId(Long ruleFromformId) {
+  public void setRuleFromformId(Integer ruleFromformId) {
     this.ruleFromformId = ruleFromformId;
   }
 
 
-  public Long getRuleRlformId() {
+  public Integer getRuleRlformId() {
     return ruleRlformId;
   }
 
-  public void setRuleRlformId(Long ruleRlformId) {
+  public void setRuleRlformId(Integer ruleRlformId) {
     this.ruleRlformId = ruleRlformId;
   }
 
 
-  public Long getRuleRuleformId() {
+  public Integer getRuleRuleformId() {
     return ruleRuleformId;
   }
 
-  public void setRuleRuleformId(Long ruleRuleformId) {
+  public void setRuleRuleformId(Integer ruleRuleformId) {
     this.ruleRuleformId = ruleRuleformId;
   }
 
 
-  public Long getOrdering() {
+  public Integer getOrdering() {
     return ordering;
   }
 
-  public void setOrdering(Long ordering) {
+  public void setOrdering(Integer ordering) {
     this.ordering = ordering;
   }
 
 
-  public Long getEntrytypeId() {
+  public Integer getEntrytypeId() {
     return entrytypeId;
   }
 
-  public void setEntrytypeId(Long entrytypeId) {
+  public void setEntrytypeId(Integer entrytypeId) {
     this.entrytypeId = entrytypeId;
   }
 

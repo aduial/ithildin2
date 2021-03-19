@@ -1,60 +1,71 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "elementview")
+@DatabaseTable(tableName = "ELEMENTVIEW")
 public class ElementView{
 
-  @Id
-  private Long entryidfrom;
-  private Long entryidto;
-  private Long refidfrom;
-  private Long refidto;
+  @DatabaseField
+  private Integer entryidfrom;
+  @DatabaseField
+  private Integer entryidto;
+  @DatabaseField
+  private Integer refidfrom;
+  @DatabaseField
+  private Integer refidto;
+  @DatabaseField
   private String languageto;
+  @DatabaseField
   private String formtxt;
+  @DatabaseField
   private String grammartxt;
+  @DatabaseField
   private String sourcename;
+  @DatabaseField
   private String sourceprefix;
+  @DatabaseField
   private String sourcestring;
+  @DatabaseField
   private String sourcetypetxt;
 
   protected ElementView() {}
 
-  public Long getEntryidfrom() {
+  public Integer getEntryidfrom() {
     return entryidfrom;
   }
 
-  public void setEntryidfrom(Long entryidfrom) {
+  public void setEntryidfrom(Integer entryidfrom) {
     this.entryidfrom = entryidfrom;
   }
 
 
-  public Long getEntryidto() {
+  public Integer getEntryidto() {
     return entryidto;
   }
 
-  public void setEntryidto(Long entryidto) {
+  public void setEntryidto(Integer entryidto) {
     this.entryidto = entryidto;
   }
 
 
-  public Long getRefidfrom() {
+  public Integer getRefidfrom() {
     return refidfrom;
   }
 
-  public void setRefidfrom(Long refidfrom) {
+  public void setRefidfrom(Integer refidfrom) {
     this.refidfrom = refidfrom;
   }
 
 
-  public Long getRefidto() {
+  public Integer getRefidto() {
     return refidto;
   }
 
-  public void setRefidto(Long refidto) {
+  public void setRefidto(Integer refidto) {
     this.refidto = refidto;
   }
 

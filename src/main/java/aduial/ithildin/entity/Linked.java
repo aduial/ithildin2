@@ -1,96 +1,106 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
 
-@DatabaseTable(tableName = "linked")
+@DatabaseTable(tableName = "LINKED")
 public class Linked {
 
-  @Id
-  private Long id;
-  private Long linkedtypeId;
-  private Long entryId;
-  private Long refId;
-  private Long toLanguageId;
-  private Long toEntryId;
-  private Long ordering;
-  private Long sourceId;
+  @DatabaseField(id = true)
+  private Integer id;
+  @DatabaseField
+  private Integer linkedtypeId;
+  @DatabaseField
+  private Integer entryId;
+  @DatabaseField
+  private Integer refId;
+  @DatabaseField
+  private Integer toLanguageId;
+  @DatabaseField
+  private Integer toEntryId;
+  @DatabaseField
+  private Integer ordering;
+  @DatabaseField
+  private Integer sourceId;
+  @DatabaseField
   private String mark;
+  @DatabaseField
   private String source;
 
   protected Linked() {}
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public Long getLinkedtypeId() {
+  public Integer getLinkedtypeId() {
     return linkedtypeId;
   }
 
-  public void setLinkedtypeId(Long linkedtypeId) {
+  public void setLinkedtypeId(Integer linkedtypeId) {
     this.linkedtypeId = linkedtypeId;
   }
 
 
-  public Long getEntryId() {
+  public Integer getEntryId() {
     return entryId;
   }
 
-  public void setEntryId(Long entryId) {
+  public void setEntryId(Integer entryId) {
     this.entryId = entryId;
   }
 
 
-  public Long getRefId() {
+  public Integer getRefId() {
     return refId;
   }
 
-  public void setRefId(Long refId) {
+  public void setRefId(Integer refId) {
     this.refId = refId;
   }
 
 
-  public Long getToLanguageId() {
+  public Integer getToLanguageId() {
     return toLanguageId;
   }
 
-  public void setToLanguageId(Long toLanguageId) {
+  public void setToLanguageId(Integer toLanguageId) {
     this.toLanguageId = toLanguageId;
   }
 
 
-  public Long getToEntryId() {
+  public Integer getToEntryId() {
     return toEntryId;
   }
 
-  public void setToEntryId(Long toEntryId) {
+  public void setToEntryId(Integer toEntryId) {
     this.toEntryId = toEntryId;
   }
 
 
-  public Long getOrdering() {
+  public Integer getOrdering() {
     return ordering;
   }
 
-  public void setOrdering(Long ordering) {
+  public void setOrdering(Integer ordering) {
     this.ordering = ordering;
   }
 
 
-  public Long getSourceId() {
+  public Integer getSourceId() {
     return sourceId;
   }
 
-  public void setSourceId(Long sourceId) {
+  public void setSourceId(Integer sourceId) {
     this.sourceId = sourceId;
   }
 

@@ -1,37 +1,38 @@
 package aduial.ithildin.entity;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "entrynoteview")
+@DatabaseTable(tableName = "ENTRYNOTEVIEW")
 public class EntryNoteView{
 
-  @DatabaseField(id = true)
-  private Long entryId;
   @DatabaseField
-  private Long ordering;
+  private Integer entryId;
   @DatabaseField
+  private Integer ordering;
+  @DatabaseField(dataType = DataType.LONG_STRING)
   private String txt;
 
   protected EntryNoteView() {}
 
-  public Long getEntryId() {
+  public Integer getEntryId() {
     return entryId;
   }
 
-  public void setEntryId(Long entryId) {
+  public void setEntryId(Integer entryId) {
     this.entryId = entryId;
   }
 
 
-  public Long getOrdering() {
+  public Integer getOrdering() {
     return ordering;
   }
 
-  public void setOrdering(Long ordering) {
+  public void setOrdering(Integer ordering) {
     this.ordering = ordering;
   }
 

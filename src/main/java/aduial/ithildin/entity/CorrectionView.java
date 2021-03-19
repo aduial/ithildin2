@@ -1,40 +1,47 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "correctionview")
+@DatabaseTable(tableName = "CORRECTIONVIEW")
 public class CorrectionView{
 
-  @Id
-  private Long refidfrom;
-  private Long refidto;
+  @DatabaseField
+  private Integer refidfrom;
+  @DatabaseField
+  private Integer refidto;
+  @DatabaseField
   private String formtxt;
+  @DatabaseField
   private String sourcename;
+  @DatabaseField
   private String sourceprefix;
+  @DatabaseField
   private String sourcestring;
+  @DatabaseField
   private String sourcetypetxt;
 
   protected CorrectionView() {}
 
-  public Long getRefidfrom() {
+  public Integer getRefidfrom() {
     return refidfrom;
   }
 
-  public void setRefidfrom(Long refidfrom) {
+  public void setRefidfrom(Integer refidfrom) {
     this.refidfrom = refidfrom;
   }
 
 
-  public Long getRefidto() {
+  public Integer getRefidto() {
     return refidto;
   }
 
-  public void setRefidto(Long refidto) {
+  public void setRefidto(Integer refidto) {
     this.refidto = refidto;
   }
 

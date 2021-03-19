@@ -1,24 +1,26 @@
 package aduial.ithildin.entity;
 
-import com.j256.ormlite.table.DatabaseTable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;;
 
 /**
  * Created by luthien on 18/02/2021.
  */
-@DatabaseTable(tableName = "grammar")
+@DatabaseTable(tableName = "GRAMMAR")
 public class Grammar {
 
-  @Id
-  private Long id;
+  @DatabaseField(id = true)
+  private Integer id;
+  @DatabaseField
   private String txt;
 
   protected Grammar() {}
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
