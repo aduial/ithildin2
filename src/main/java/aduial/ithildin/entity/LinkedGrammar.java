@@ -7,15 +7,15 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "LINKED_GRAMMAR")
 public class LinkedGrammar {
 
-    @DatabaseField(id = true)
+    @DatabaseField(index = true)
     private Integer linkedId;
-    @DatabaseField(id = true)
+    @DatabaseField(index = true)
     private Integer entryId;
-    @DatabaseField(id = true)
+    @DatabaseField(index = true)
     private Integer grammarId;
-    @DatabaseField(id = true)
+    @DatabaseField(index = true)
     private Integer ordering;
-    @DatabaseField(id = true)
+    @DatabaseField(index = true)
     private Integer grammartypeId;
 
 

@@ -9,11 +9,11 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "LINKED_FORM")
 public class LinkedForm {
 
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer linkedId;
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer formId;
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer ordering;
 
     public Integer getLinkedId() {

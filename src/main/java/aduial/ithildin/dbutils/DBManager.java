@@ -1,5 +1,8 @@
 package aduial.ithildin.dbutils;
 
+import aduial.ithildin.entity.SimpLexicon;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.logger.Logger;
 import com.j256.ormlite.logger.LoggerFactory;
@@ -19,6 +22,8 @@ public class DBManager{
         public static final String PASS = "mellon";
 
     private static ConnectionSource connectionSource;
+
+    public DBManager() throws SQLException {}
 
     private static void createConnectionSource(){
         try {
@@ -43,4 +48,9 @@ public class DBManager{
             }
         }
     }
+
+    Dao<SimpLexicon, Long> simplexitonDao
+            = DaoManager.createDao(connectionSource, SimpLexicon.class);
+
+
 }

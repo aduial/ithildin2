@@ -6,22 +6,22 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "EXAMPLE")
 public class Example {
 
-    @DatabaseField(id = true)
+    @DatabaseField(index = true)
     private Integer linkedId;
 
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer refId;
 
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer sourceId;
 
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer formId;
 
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer ordering;
 
-    @DatabaseField
+    @DatabaseField(index = true)
     private Integer exampletypeId;
 
     @DatabaseField
