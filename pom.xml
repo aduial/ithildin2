@@ -52,20 +52,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-jdbc</artifactId>
+            <version>5.3</version>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!-- This dependency is a normal Maven dependency, here mainly as an example. It brings in other transitive
-         dependencies as well. -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.javafaker</groupId>-->
-<!--            <artifactId>javafaker</artifactId>-->
-<!--            <version>1.0.2</version>-->
-<!--        </dependency>-->
-
-
 
         <!-- Base JavaFX import. This dependency is provided via a module, so we don't want it included in the
          shaded master jar, but by including it here it it works nicely with IDEs such as IntelliJ. -->
