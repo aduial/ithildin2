@@ -24,7 +24,7 @@
       prefWidth="900.0"
       style="-fx-background-color: white;"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="aduial.ithildin.controller.Mabed">
+      fx:controller="aduial.ithildin.controller.MabedController">
     <children>
         <HBox prefHeight="543.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
             <children>

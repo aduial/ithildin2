@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "CHANGEVIEW")
-public class ChangeView{
+public class ChangeView implements Root {
 
   @DatabaseField
   private Integer refidfrom;

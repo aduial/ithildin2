@@ -9,6 +9,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "REFINFLECTVIEW")
 public class RefInflectView{
 
+  public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
+
   @DatabaseField
   private Integer entryId;
   @DatabaseField

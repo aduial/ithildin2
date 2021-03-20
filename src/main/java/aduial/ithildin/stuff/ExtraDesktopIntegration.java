@@ -1,4 +1,4 @@
-package aduial.ithildin;
+package aduial.ithildin.stuff;
 
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.Taskbar.Feature;
 import java.awt.image.BufferedImage;
 
-import static aduial.ithildin.StandardMenus.Configure;
+import static aduial.ithildin.stuff.StandardMenus.Configure;
 
 public class ExtraDesktopIntegration {
 

@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "INFLECTVIEW")
-public class InflectView{
+public class InflectView implements Root {
 
   @DatabaseField
   private Integer entryidfrom;

@@ -1,4 +1,4 @@
-package aduial.ithildin;
+package aduial.ithildin.stuff;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

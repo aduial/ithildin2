@@ -7,7 +7,9 @@ import com.j256.ormlite.table.DatabaseTable;;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "SPEECHFORMVIEW")
-public class SpeechFormView{
+public class SpeechFormView implements Root {
+
+  public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
 
   @DatabaseField
   private Integer entryId;

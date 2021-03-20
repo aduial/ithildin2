@@ -1,7 +1,8 @@
 package aduial.ithildin.controller;
 
+import aduial.ithildin.dao.*;
 import aduial.ithildin.entity.*;
-import aduial.ithildin.repository.*;
+import aduial.ithildin.exception.SauronException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,15 +11,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.util.StringConverter;
-import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import java.sql.SQLException;
 
 /**
  * @author Lúthien
- * ᴺS. !mabed-, y]wl2 v. “to ask [a question]” [created by Fiona Jallings, NGNS]
+ * ᴺS. !mabed-, v. “to ask [a question]” [created by Fiona Jallings, NGNS]
  */
-public class Mabed {
+public class MabedController {
 
     private static final String TABLE
                                       = "<table style='margin-top:3px; border: 1px solid black; border-collapse: collapse;'>";
@@ -30,64 +30,55 @@ public class Mabed {
     private static final String ENDTD = "</td>";
 
     @FXML
-    private TextField                        searchTextField;
+    private TextField                         searchTextField;
     @FXML
-    private TableView<SimpLexicon>           matchTable;
+    private TableView<SimpLexicon>            matchTable;
     @FXML
-    private TableColumn<SimpLexicon, Long>   idColumn;
+    private TableColumn<SimpLexicon, Integer> idColumn;
     @FXML
-    private TableColumn<SimpLexicon, String> formColumn;
+    private TableColumn<SimpLexicon, String>  formColumn;
     @FXML
-    private TableColumn<SimpLexicon, String> glossColumn;
+    private TableColumn<SimpLexicon, String>  glossColumn;
     @FXML
-    private TableColumn<SimpLexicon, Long>   entrytypeIdColumn;
+    private TableColumn<SimpLexicon, Integer> entrytypeIdColumn;
     @FXML
-    private ToggleButton                     glossToggleButton;
+    private ToggleButton                      glossToggleButton;
     @FXML
-    private ComboBox<Language>               languageChooser;
+    private ComboBox<Language>                languageChooser;
     @FXML
-    private WebView                          primaryWebView;
+    private WebView                           primaryWebView;
     @FXML
-    private WebView                          secondaryWebView;
+    private WebView                           secondaryWebView;
     @FXML
-    private ToggleButton                     glsToggleButton;
+    private ToggleButton                      glsToggleButton;
     @FXML
-    private ToggleButton                     refToggleButton;
+    private ToggleButton                      refToggleButton;
     @FXML
-    private ToggleButton                     drvToggleButton;
+    private ToggleButton                      drvToggleButton;
     @FXML
-    private ToggleButton                     iflToggleButton;
+    private ToggleButton                      iflToggleButton;
     @FXML
-    private ToggleButton                     elmToggleButton;
+    private ToggleButton                      elmToggleButton;
     @FXML
-    private ToggleButton                     cogToggleButton;
+    private ToggleButton                      cogToggleButton;
 
     private boolean searchGlosses = false;
 
-    private LexiconRepo lexiconRepo;
-    private Lexicon     selectedLexicon;
+    private LexiconDao     lexiconDao     = new LexiconDao();
+    private SimpLexiconDao simpLexiconDao = new SimpLexiconDao();
+    private LanguageDao    languageDao    = new LanguageDao();
+    private SpeechFormDao  speechFormDao  = new SpeechFormDao();
+    private EntryNoteDao   entryNoteDao   = new EntryNoteDao();
+    private RefGlossDao    refGlossDao    = new RefGlossDao();
+    private RefDerivDao    refDerivDao    = new RefDerivDao();
+    private RefInflectDao  refInflectDao  = new RefInflectDao();
+    private RefElementDao  refElementDao  = new RefElementDao();
+    private RefCognateDao  refCognateDao  = new RefCognateDao();
+    private RefDao         refDao         = new RefDao();
 
-    private RefRepo             refRepo;
+    private SimpLexicon         selectSimpLexicon;
+    private Lexicon             selectedLexicon;
     private ObservableList<Ref> refList;
-
-    private SimpLexiconRepo simpLexiconRepo;
-    private SimpLexicon     selectSimplexicon;
-
-    private LanguageRepo languageRepo;
-
-    private SpeechFormRepo speechFormRepo;
-
-    private EntryNoteRepo entryNoteRepo;
-
-    private RefGlossRepo refGlossRepo;
-
-    private RefDerivRepo refDerivRepo;
-
-    private RefInflectRepo refInflectRepo;
-
-    private RefElementRepo refElementRepo;
-
-    private RefCognateRepo refCognateRepo;
 
     private WebView wv1;
     private WebView wv2;
@@ -107,28 +98,19 @@ public class Mabed {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException, SauronException {
+        languageDao = new LanguageDao();
         matchTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        populateLanguageChooser(FXCollections.observableArrayList(languageRepo.findLanguagesByIdIsLessThanAndIdIsNotAndParentIdIsNotNullAndParentIdIsNot(
-                1000L,
-                127L,
-                127L)));
+        populateLanguageChooser(FXCollections.observableArrayList(languageDao.getSearchLanguages(1000, 127, 127)));
 
-        //For multithreading: Create executor that uses daemon threads:
-//        ExecutorService exec = Executors.newCachedThreadPool((runnable) -> {
-//            Thread t = new Thread(runnable);
-//            t.setDaemon(true);
-//            return t;
-//        });
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<SimpLexicon, Long>("entryId"));
-        formColumn.setCellValueFactory(new PropertyValueFactory<SimpLexicon, String>("form"));
-        glossColumn.setCellValueFactory(new PropertyValueFactory<SimpLexicon, String>("gloss"));
-        entrytypeIdColumn.setCellValueFactory(new PropertyValueFactory<SimpLexicon, Long>("entryTypeId"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("entryId"));
+        formColumn.setCellValueFactory(new PropertyValueFactory<>("form"));
+        glossColumn.setCellValueFactory(new PropertyValueFactory<>("gloss"));
+        entrytypeIdColumn.setCellValueFactory(new PropertyValueFactory<>("entryTypeId"));
         idColumn.setVisible(false);
         entrytypeIdColumn.setVisible(false);
 
-        matchTable.setRowFactory((TableView<SimpLexicon> row) -> new TableRow<SimpLexicon>() {
+        matchTable.setRowFactory((TableView<SimpLexicon> row) -> new TableRow<>() {
             @Override
             public void updateItem(SimpLexicon entry, boolean empty) {
                 super.updateItem(entry, empty);
@@ -174,11 +156,11 @@ public class Mabed {
         reallyDoSearchNow();
     }
 
-    public void keyReleased() {
+    public void keyReleased() throws SauronException {
         showSelectedLexicon();
     }
 
-    public void rowClicked() {
+    public void rowClicked() throws SauronException {
         showSelectedLexicon();
     }
 
@@ -217,9 +199,9 @@ public class Mabed {
         writeContent();
     }
 
-    private void showSelectedLexicon() {
-        selectSimplexicon = matchTable.getSelectionModel().getSelectedItem();
-        selectedLexicon = lexiconRepo.findByEntryId(selectSimplexicon.getEntryId());
+    private void showSelectedLexicon() throws SauronException, SQLException {
+        selectSimpLexicon = matchTable.getSelectionModel().getSelectedItem();
+        selectedLexicon = lexiconDao.findByEntryId(selectSimpLexicon.getEntryId());
         display(primaryWebView, secondaryWebView);
     }
 
@@ -234,16 +216,16 @@ public class Mabed {
         try {
             if (searchGlosses) {
 
-                simpLexiconList = FXCollections.observableArrayList(simpLexiconRepo.findByGlossContainingAndLanguageId(
+                simpLexiconList = FXCollections.observableArrayList(simpLexiconDao.findByGlossAndLangId(
                         searchTextField.getText(),
                         languageChooser.getValue().getId()));
             } else {
-                simpLexiconList = FXCollections.observableArrayList(simpLexiconRepo.findByFormContainingAndLanguageId(
+                simpLexiconList = FXCollections.observableArrayList(simpLexiconDao.findByFormAndLangId(
                         searchTextField.getText(),
                         languageChooser.getValue().getId()));
             }
             populateMatchTable(simpLexiconList);
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException | SauronException e) {
             e.printStackTrace();
         }
     }
@@ -251,7 +233,7 @@ public class Mabed {
     @FXML
     private void populateLanguageChooser(ObservableList<Language> languageList) {
         languageChooser.setItems(languageList);
-        languageChooser.setConverter(new StringConverter<Language>() {
+        languageChooser.setConverter(new StringConverter<>() {
 
             @Override
             public String toString(Language lang) {
@@ -274,7 +256,7 @@ public class Mabed {
     private void writeContent() {
         String txt1 = writeHeadLine();
         String txt2 = writeWordNotes();
-        refList = FXCollections.observableArrayList(refRepo.findRefsByEntryId(selectedLexicon.getEntryId()));
+        refList = FXCollections.observableArrayList(refDao.findById(Ref.class, selectedLexicon.getEntryId()));
         if (refVisible) { txt1 += writeRefs(); }
         if (glsVisible) { txt1 += writeGlosses(); }
         if (drvVisible) { txt1 += writeDerivs(); }
@@ -285,10 +267,10 @@ public class Mabed {
         wv2.getEngine().loadContent(txt2);
     }
 
-    private String writeHeadLine() {
+    private String writeHeadLine() throws SQLException, SauronException {
         String txt = "<p> " + spanTag(selectedLexicon.getLangMnemonic() + ". ", 1, 14, 3, 0, "333");
         txt += spanTag(selectedLexicon.getForm() + ", ", 1, 12, 7, 1, "336");
-        txt += spanTag(speechFormRepo.findSpeechFormViewByEntryId(selectedLexicon.getEntryId()).getTxt() + ". ",
+        txt += spanTag(speechFormDao.findByEntryId(selectedLexicon.getEntryId()).getTxt() + ". ",
                        1,
                        11,
                        5,
@@ -301,7 +283,7 @@ public class Mabed {
 
     private String writeWordNotes() {
         String txt = "";
-        for (EntryNoteView env : entryNoteRepo.findByEntryId(selectedLexicon.getEntryId())) {
+        for (EntryNoteView env : entryNoteDao.findByEntryId(selectedLexicon.getEntryId())) {
             txt += optStylePtag(env.getTxt(), 1, 11, 4, 0, "222");
         }
         return txt;
@@ -327,7 +309,7 @@ public class Mabed {
     private String writeGlosses() {
         boolean rg      = false;
         String  glosses = spanTag("Glosses: ", 1, 12, 7, 0, "228") + "<ul style=\"margin-top:3px;\">";
-        for (RefGlossView refGlossView : refGlossRepo.findByEntryId(selectedLexicon.getEntryId())) {
+        for (RefGlossView refGlossView : refGlossDao.findByEntryId(selectedLexicon.getEntryId())) {
             glosses += "<li " + inline(1, 11, 4, 0, "222") + ">" + refGlossView.getRefgloss();
             rg = true;
         }
@@ -346,7 +328,7 @@ public class Mabed {
         derivs += TH15 + spanTag("gloss(es) ", 2, 11, 4, 2, "228") + ENDTH;
         derivs += TH + spanTag("sourc(es) ", 2, 11, 4, 2, "228") + "</th></tr>";
 
-        for (RefDerivView rdv : refDerivRepo.findByEntryId(selectedLexicon.getEntryId())) {
+        for (RefDerivView rdv : refDerivDao.findByEntryId(selectedLexicon.getEntryId())) {
             derivs += "<tr>";
             derivs += TD
                       + spanTag(rdv.getForm(), 2, 12, 4, 1, "2B2")
@@ -381,7 +363,7 @@ public class Mabed {
         inflects += TH10 + spanTag("gloss ", 2, 11, 4, 2, "228") + ENDTH;
         inflects += TH + spanTag("sourc(es) ", 2, 11, 4, 2, "228") + "</th></tr>";
 
-        for (RefInflectView refInflect : refInflectRepo.findByEntryId(selectedLexicon.getEntryId())) {
+        for (RefInflectView refInflect : refInflectDao.findByEntryId(selectedLexicon.getEntryId())) {
             String gloss = refInflect.getGloss();
             inflects += "<tr>";
             inflects += TD
@@ -411,7 +393,7 @@ public class Mabed {
         String  gloss, sources;
         String  elements = spanTag("Elements: ", 1, 12, 7, 0, "228");
         elements += "<ul style='margin-top:3px;'>";
-        for (RefElementView refElement : refElementRepo.findByEntryId(selectedLexicon.getEntryId())) {
+        for (RefElementView refElement : refElementDao.findByEntryId(selectedLexicon.getEntryId())) {
             gloss = null == refElement.getGloss() ? "" : refElement.getGloss();
             sources = null == refElement.getSources() ? "" : refElement.getSources();
             elements += "<li>";
@@ -436,7 +418,7 @@ public class Mabed {
         String  gloss, sources;
         String  cognates = spanTag("Cognates: ", 1, 12, 7, 0, "228");
         cognates += "<ul style='margin-top:3px;'>";
-        for (RefCognateView refCognate : refCognateRepo.findByEntryId(selectedLexicon.getEntryId())) {
+        for (RefCognateView refCognate : refCognateDao.findByEntryId(selectedLexicon.getEntryId())) {
             gloss = null == refCognate.getGloss() ? "" : refCognate.getGloss();
             sources = null == refCognate.getSources() ? "" : refCognate.getSources();
             cognates += "<li>";

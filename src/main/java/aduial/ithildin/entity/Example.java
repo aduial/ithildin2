@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "EXAMPLE")
-public class Example {
+public class Example implements Root {
 
     @DatabaseField(index = true)
     private Integer linkedId;

@@ -8,7 +8,7 @@
       prefHeight="200.0"
       prefWidth="200.0"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="aduial.ithildin.controller.Athrabeth">
+      fx:controller="aduial.ithildin.controller.AthrabethController">
 
     <Button fx:id="closeButton" mnemonicParsing="false" text="Novaer"/>
 

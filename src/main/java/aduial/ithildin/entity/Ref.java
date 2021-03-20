@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;;
  */
 
 @DatabaseTable(tableName = "REF")
-public class Ref {
+public class Ref implements Root {
 
   @DatabaseField(id = true)
   private Integer id;

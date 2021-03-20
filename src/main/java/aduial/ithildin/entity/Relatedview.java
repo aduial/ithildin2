@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "RELATEDVIEW")
-public class Relatedview {
+public class Relatedview implements Root {
 
   @DatabaseField
   private Integer entryidfrom;

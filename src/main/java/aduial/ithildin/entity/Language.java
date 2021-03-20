@@ -8,15 +8,18 @@ import com.j256.ormlite.table.DatabaseTable;;
  */
 
 @DatabaseTable(tableName = "LANGUAGE")
-public class Language {
+public class Language implements Root {
 
-  @DatabaseField(id = true)
+  public static final String ID_FIELD_NAME = "ID";
+  public static final String PARENTID_FIELD_NAME = "PARENT_ID";
+
+  @DatabaseField(id = true, columnName = ID_FIELD_NAME)
   private Integer id;
   @DatabaseField
   private String name;
   @DatabaseField
   private String mnemonic;
-  @DatabaseField
+  @DatabaseField(columnName = PARENTID_FIELD_NAME)
   private Integer parentId;
 
   protected Language() {}

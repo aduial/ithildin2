@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "GRAMMAR")
-public class Grammar {
+public class Grammar implements Root {
 
   @DatabaseField(id = true)
   private Integer id;

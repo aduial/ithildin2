@@ -28,7 +28,7 @@
       prefWidth="900.0"
       style="-fx-background-color: white;"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="aduial.ithildin.controller.EditController">
+      fx:controller="aduial.ithildin.controller.EchadController">
     <children>
         <HBox id="editorTopHBox" fx:id="editorTopHBox" prefHeight="100.0" stylesheets="@Mabed.css">
             <children>

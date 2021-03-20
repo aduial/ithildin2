@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "GLOSS")
-public class Gloss {
+public class Gloss implements Root {
 
   @DatabaseField(id = true)
   private Integer id;

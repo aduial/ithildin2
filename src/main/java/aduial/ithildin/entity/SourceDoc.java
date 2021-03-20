@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by luthien on 19/03/2021.
  */
 @DatabaseTable(tableName = "SOURCE_DOC")
-public class SourceDoc {
+public class SourceDoc implements Root {
 
     @DatabaseField
     private Integer sourceId;

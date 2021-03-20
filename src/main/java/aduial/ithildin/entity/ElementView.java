@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "ELEMENTVIEW")
-public class ElementView{
+public class ElementView implements Root {
 
   @DatabaseField
   private Integer entryidfrom;

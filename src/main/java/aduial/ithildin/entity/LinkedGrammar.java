@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 
 @DatabaseTable(tableName = "LINKED_GRAMMAR")
-public class LinkedGrammar {
+public class LinkedGrammar implements Root {
 
     @DatabaseField(index = true)
     private Integer linkedId;

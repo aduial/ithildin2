@@ -1,4 +1,4 @@
-package aduial.ithildin;
+package aduial.ithildin.stuff;
 
 public class MacSpecific {
 

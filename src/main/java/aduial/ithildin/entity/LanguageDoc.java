@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by luthien on 19/03/2021.
  */
 @DatabaseTable(tableName = "LANGUAGE_DOC")
-public class LanguageDoc {
+public class LanguageDoc implements Root {
 
     @DatabaseField
     private Integer languageId;

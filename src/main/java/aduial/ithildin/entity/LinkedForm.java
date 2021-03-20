@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by luthien on 19/03/2021.
  */
 @DatabaseTable(tableName = "LINKED_FORM")
-public class LinkedForm {
+public class LinkedForm implements Root {
 
     @DatabaseField(index = true)
     private Integer linkedId;

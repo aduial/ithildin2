@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;;
  */
 
 @DatabaseTable(tableName = "LINKED")
-public class Linked {
+public class Linked implements Root {
 
   @DatabaseField(id = true)
   private Integer id;

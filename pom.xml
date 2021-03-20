@@ -15,7 +15,7 @@
 
     <properties>
         <!-- Set this to the class with the main method for your application -->
-        <main-class>aduial.ithildin.HelloWorld</main-class>
+        <main-class>aduial.ithildin.Ithildin</main-class>
         <!-- Change your app's name to something interesting... but you might want to avoid spaces
         just to safe for compatibility across operating systems. -->
         <app.name>Ithildin</app.name>

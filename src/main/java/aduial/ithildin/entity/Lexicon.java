@@ -8,162 +8,164 @@ import com.j256.ormlite.table.DatabaseTable;;
  */
 
 @DatabaseTable(tableName = "LEXICON")
-public class Lexicon {
+public class Lexicon implements Root {
 
-  @DatabaseField
-  private Integer entryId;
-  @DatabaseField
-  private String form;
-  @DatabaseField
-  private String langMnemonic;
-  @DatabaseField
-  private String langName;
-  @DatabaseField
-  private String gloss;
-  @DatabaseField
-  private String cat;
-  @DatabaseField
-  private String tengwar;
-  @DatabaseField
-  private String mark;
-  @DatabaseField
-  private String eldamoPageid;
-  @DatabaseField
-  private String orderfield;
-  @DatabaseField
-  private Integer parentId;
-  @DatabaseField
-  private Integer ordering;
-  @DatabaseField
-  private Integer entrytypeId;
-  @DatabaseField
-  private String entryType;
+    public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
 
-  protected Lexicon() {}
+    @DatabaseField
+    private Integer entryId;
+    @DatabaseField
+    private String  form;
+    @DatabaseField
+    private String  langMnemonic;
+    @DatabaseField
+    private String  langName;
+    @DatabaseField
+    private String  gloss;
+    @DatabaseField
+    private String  cat;
+    @DatabaseField
+    private String  tengwar;
+    @DatabaseField
+    private String  mark;
+    @DatabaseField
+    private String  eldamoPageid;
+    @DatabaseField
+    private String  orderfield;
+    @DatabaseField
+    private Integer parentId;
+    @DatabaseField
+    private Integer ordering;
+    @DatabaseField
+    private Integer entrytypeId;
+    @DatabaseField
+    private String  entryType;
 
-  public Integer getEntryId() {
-    return entryId;
-  }
+    protected Lexicon() {}
 
-  public void setEntryId(Integer id) {
-    this.entryId = id;
-  }
+    public Integer getEntryId() {
+        return entryId;
+    }
 
-
-  public String getForm() {
-    return form;
-  }
-
-  public void setForm(String form) {
-    this.form = form;
-  }
+    public void setEntryId(Integer id) {
+        this.entryId = id;
+    }
 
 
-  public String getLangMnemonic() {
-    return langMnemonic;
-  }
+    public String getForm() {
+        return form;
+    }
 
-  public void setLangMnemonic(String langMnemonic) {
-    this.langMnemonic = langMnemonic;
-  }
-
-
-  public String getLangName() {
-    return langName;
-  }
-
-  public void setLangName(String langName) {
-    this.langName = langName;
-  }
+    public void setForm(String form) {
+        this.form = form;
+    }
 
 
-  public String getGloss() {
-    return gloss;
-  }
+    public String getLangMnemonic() {
+        return langMnemonic;
+    }
 
-  public void setGloss(String gloss) {
-    this.gloss = gloss;
-  }
-
-
-  public String getCat() {
-    return cat;
-  }
-
-  public void setCat(String cat) {
-    this.cat = cat;
-  }
+    public void setLangMnemonic(String langMnemonic) {
+        this.langMnemonic = langMnemonic;
+    }
 
 
-  public String getTengwar() {
-    return tengwar;
-  }
+    public String getLangName() {
+        return langName;
+    }
 
-  public void setTengwar(String tengwar) {
-    this.tengwar = tengwar;
-  }
-
-
-  public String getMark() {
-    return mark;
-  }
-
-  public void setMark(String mark) {
-    this.mark = mark;
-  }
+    public void setLangName(String langName) {
+        this.langName = langName;
+    }
 
 
-  public String getEldamoPageid() {
-    return eldamoPageid;
-  }
+    public String getGloss() {
+        return gloss;
+    }
 
-  public void setEldamoPageid(String eldamoPageid) {
-    this.eldamoPageid = eldamoPageid;
-  }
-
-
-  public String getOrderfield() {
-    return orderfield;
-  }
-
-  public void setOrderfield(String orderfield) {
-    this.orderfield = orderfield;
-  }
+    public void setGloss(String gloss) {
+        this.gloss = gloss;
+    }
 
 
-  public Integer getParentId() {
-    return parentId;
-  }
+    public String getCat() {
+        return cat;
+    }
 
-  public void setParentId(Integer parentId) {
-    this.parentId = parentId;
-  }
-
-
-  public Integer getOrdering() {
-    return ordering;
-  }
-
-  public void setOrdering(Integer ordering) {
-    this.ordering = ordering;
-  }
+    public void setCat(String cat) {
+        this.cat = cat;
+    }
 
 
-  public Integer getEntrytypeId() {
-    return entrytypeId;
-  }
+    public String getTengwar() {
+        return tengwar;
+    }
 
-  public void setEntrytypeId(Integer entrytypeId) {
-    this.entrytypeId = entrytypeId;
-  }
+    public void setTengwar(String tengwar) {
+        this.tengwar = tengwar;
+    }
 
 
-  public String getEntryType() {
-    return entryType;
-  }
+    public String getMark() {
+        return mark;
+    }
 
-  public void setEntryType(String entryType) {
-    this.entryType = entryType;
-  }
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+
+    public String getEldamoPageid() {
+        return eldamoPageid;
+    }
+
+    public void setEldamoPageid(String eldamoPageid) {
+        this.eldamoPageid = eldamoPageid;
+    }
+
+
+    public String getOrderfield() {
+        return orderfield;
+    }
+
+    public void setOrderfield(String orderfield) {
+        this.orderfield = orderfield;
+    }
+
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+
+    public Integer getOrdering() {
+        return ordering;
+    }
+
+    public void setOrdering(Integer ordering) {
+        this.ordering = ordering;
+    }
+
+
+    public Integer getEntrytypeId() {
+        return entrytypeId;
+    }
+
+    public void setEntrytypeId(Integer entrytypeId) {
+        this.entrytypeId = entrytypeId;
+    }
+
+
+    public String getEntryType() {
+        return entryType;
+    }
+
+    public void setEntryType(String entryType) {
+        this.entryType = entryType;
+    }
 
 }

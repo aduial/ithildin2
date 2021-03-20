@@ -1,4 +1,4 @@
-package aduial.ithildin;
+package aduial.ithildin.stuff;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;

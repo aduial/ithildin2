@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "CORRECTIONVIEW")
-public class CorrectionView{
+public class CorrectionView implements Root {
 
   @DatabaseField
   private Integer refidfrom;

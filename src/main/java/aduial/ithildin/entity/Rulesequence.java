@@ -5,7 +5,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "RULESEQUENCE")
-public class Rulesequence {
+public class Rulesequence implements Root {
 
     @DatabaseField
     private Integer derivId;
