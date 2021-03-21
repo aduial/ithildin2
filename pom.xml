@@ -35,8 +35,8 @@
         <!-- Set the project to UTF-8, avoiding warnings in the build logs -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>15</maven.compiler.target>
 
         <!-- Used to set both the path to find the JavaFX modules and also the versions for Maven dependencies -->
         <javafx.version>16</javafx.version>
@@ -63,8 +63,9 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Base JavaFX import. This dependency is provided via a module, so we don't want it included in the
-         shaded master jar, but by including it here it it works nicely with IDEs such as IntelliJ. -->
+        <!-- This downloads the platform specific JavaFX libraries used by the project. -->
+        <!-- For the final installable, the JavaFX dependencies are provided via modules, but by including these here
+         they work nicely with with IDEs and other Maven plugins (e.g. the javafx:run). -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -106,7 +107,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>3.0.0-M1</version>
                 <configuration>
                     <!-- This is an app, so we don't want to install it in the local Maven repository -->
                     <skip>true</skip>
@@ -115,7 +115,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
                 <executions>
                     <execution>
                         <!-- This copies all of the jar files declared by the Maven build into a single directory.
@@ -138,7 +137,6 @@
                 for the maven-dependency-plugin output. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
                 <configuration>
                     <outputDirectory>${project.build.directory}/dependency</outputDirectory>
                 </configuration>
@@ -203,28 +201,9 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>15</source>
-                    <target>15</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
-                </configuration>
-            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
@@ -232,13 +211,12 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.9.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>15</source>
+                        <target>15</target>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -247,8 +225,29 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.9.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -309,6 +308,35 @@
             <properties>
                 <platform>win</platform>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- This adds a "launch on finish" to the Windows msi installer. This just tweaks the Windows
+                         installer package to run the executable after the installer runs, simplifying the user experience.
+                          If you don't want this behavior, just delete this plug execution. -->
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <id>add-launch-to-msi</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>cscript</executable>
+                            <outputFile>${project.build.directory}/msi-result.log</outputFile>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <arguments>
+                                <argument>${project.build.directory}/packaging/add-launch-to-msi.js</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <profile>
             <id>mac-active</id>
@@ -322,7 +350,4 @@
             </properties>
         </profile>
     </profiles>
-    <!-- This entire section is really just Maven bookkeeping, ensuring that the build is using the more
-        recent version of many of these plugins -->
-
 </project>
