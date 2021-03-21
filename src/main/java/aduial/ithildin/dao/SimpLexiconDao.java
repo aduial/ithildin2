@@ -21,7 +21,7 @@ public class SimpLexiconDao extends CommonDao {
                       .where()
                       .eq(SimpLexicon.LANGID_FIELD_NAME, langId)
                       .and()
-                      .like(SimpLexicon.GLOSS_FIELD_NAME, gloss)
+                      .like(SimpLexicon.GLOSS_FIELD_NAME, "%" + gloss + "%")
                       .query();
     }
 
@@ -31,7 +31,7 @@ public class SimpLexiconDao extends CommonDao {
                              .where()
                              .eq(SimpLexicon.LANGID_FIELD_NAME, langId)
                              .and()
-                             .like(SimpLexicon.FORM_FIELD_NAME, form)
+                             .like(SimpLexicon.FORM_FIELD_NAME, "%" + form + "%")
                              .query();
     }
 

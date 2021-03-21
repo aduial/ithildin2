@@ -7,11 +7,11 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "REFINFLECTVIEW")
-public class RefInflectView{
+public class RefInflectView implements Root {
 
   public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
 
-  @DatabaseField
+  @DatabaseField(columnName = ENTRYID_FIELD_NAME)
   private Integer entryId;
   @DatabaseField
   private String form;

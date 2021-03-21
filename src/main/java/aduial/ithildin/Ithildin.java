@@ -1,7 +1,6 @@
 package aduial.ithildin;
 
 import aduial.ithildin.controller.HennethController;
-import com.sun.tools.javac.Main;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -18,7 +17,6 @@ public class Ithildin extends Application {
 
     private Stage      hennethStage;
     private BorderPane henneth;
-    private VBox       mabed;
     private StackPane  stackPane;
 
     @Override
@@ -26,7 +24,6 @@ public class Ithildin extends Application {
         this.hennethStage = primaryStage;
         primaryStage.setTitle("Ithildin");
         initRootLayout();
-        initSimplexiconView();
     }
 
     public void initRootLayout() {
@@ -44,7 +41,7 @@ public class Ithildin extends Application {
             hennethController.setMain(this);
             hennethStage.show(); //display the primary stage
 
-            initEditView();
+//            initEditView();
             initSearchView();
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +54,7 @@ public class Ithildin extends Application {
         try {
             FXMLLoader mabedLoader = new FXMLLoader();
             mabedLoader.setLocation(Ithildin.class.getResource("controller/Mabed.fxml"));
-            mabed = mabedLoader.load();
+            VBox mabed = mabedLoader.load();
             stackPane.getChildren().add(mabed);
 //      for (Node node: stackPane.getChildren()){
 //        node.setVisible(false);
@@ -73,8 +70,8 @@ public class Ithildin extends Application {
     public void initEditView() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("controller/Echad.fxml"));
-            VBox searchView = (VBox) loader.load();
+            loader.setLocation(Ithildin.class.getResource("controller/Echad.fxml"));
+            VBox searchView = loader.load();
             stackPane.getChildren().add(searchView);
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,19 +83,6 @@ public class Ithildin extends Application {
         nodes.get(nodes.size()-2).toFront();
     }
 
-    //Shows the simplexicon view inside the root layout.
-    public void initSimplexiconView() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("controller/Simplexicon.fxml"));
-            AnchorPane simplexiconQueryView = (AnchorPane) loader.load();
-
-            henneth.setCenter(simplexiconQueryView);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void stop() throws Exception {
 //        context.close();
@@ -106,14 +90,16 @@ public class Ithildin extends Application {
     }
 
 
-    public static void main(String[] args) {try {
-        File outputFile = File.createTempFile("debug", ".log", FileSystemView.getFileSystemView().getDefaultDirectory());
-        PrintStream output = new PrintStream(new BufferedOutputStream(new FileOutputStream(outputFile)), true);
-        System.setOut(output);
-        System.setErr(output);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+    public static void main(String[] args) {
+//        try {
+//        File outputFile = File.createTempFile("debug", ".log", FileSystemView.getFileSystemView().getDefaultDirectory());
+//        PrintStream output = new PrintStream(new BufferedOutputStream(new FileOutputStream(outputFile)), true);
+//        System.setOut(output);
+//        System.setErr(output);
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
         launch(args);
+
     }
 }

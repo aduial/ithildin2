@@ -1,7 +1,6 @@
 package aduial.ithildin.dao;
 
 import aduial.ithildin.entity.EntryNoteView;
-import aduial.ithildin.entity.SimpLexicon;
 import aduial.ithildin.exception.SauronException;
 import com.j256.ormlite.dao.Dao;
 
@@ -20,9 +19,7 @@ public class EntryNoteDao extends CommonDao {
         Dao<EntryNoteView, Object> simpLexiconDao = getDao(EntryNoteView.class);
         return simpLexiconDao.queryBuilder()
                              .where()
-                             .eq(SimpLexicon.LANGID_FIELD_NAME, langId)
-                             .and()
-                             .like(SimpLexicon.FORM_FIELD_NAME, form)
+                             .eq(EntryNoteView.ENTRYID_FIELD_NAME, entryId)
                              .query();
     }
 }

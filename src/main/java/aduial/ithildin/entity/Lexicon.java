@@ -11,14 +11,21 @@ import com.j256.ormlite.table.DatabaseTable;;
 public class Lexicon implements Root {
 
     public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
+    public static final String LANGMNEMONIC_FIELD_NAME = "LANG_MNEMONIC";
+    public static final String LANGNAME_FIELD_NAME = "LANG_NAME";
+    public static final String ELDAMOPAGEID_FIELD_NAME = "ELDAMO_PAGEID";
+    public static final String PARENTID_FIELD_NAME = "PARENT_ID";
+    public static final String ENTRYTYPEID_FIELD_NAME = "ENTRYTYPE_ID";
+    public static final String ENTRYTYPE_FIELD_NAME = "ENTRY_TYPE";
 
-    @DatabaseField
+
+    @DatabaseField(columnName = ENTRYID_FIELD_NAME)
     private Integer entryId;
     @DatabaseField
     private String  form;
-    @DatabaseField
+    @DatabaseField(columnName = LANGMNEMONIC_FIELD_NAME)
     private String  langMnemonic;
-    @DatabaseField
+    @DatabaseField(columnName = LANGNAME_FIELD_NAME)
     private String  langName;
     @DatabaseField
     private String  gloss;
@@ -28,17 +35,17 @@ public class Lexicon implements Root {
     private String  tengwar;
     @DatabaseField
     private String  mark;
-    @DatabaseField
+    @DatabaseField(columnName = ELDAMOPAGEID_FIELD_NAME)
     private String  eldamoPageid;
     @DatabaseField
     private String  orderfield;
-    @DatabaseField
+    @DatabaseField(columnName = PARENTID_FIELD_NAME)
     private Integer parentId;
     @DatabaseField
     private Integer ordering;
-    @DatabaseField
+    @DatabaseField(columnName = ENTRYTYPEID_FIELD_NAME)
     private Integer entrytypeId;
-    @DatabaseField
+    @DatabaseField(columnName = ENTRYTYPE_FIELD_NAME)
     private String  entryType;
 
     protected Lexicon() {}

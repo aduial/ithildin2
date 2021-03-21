@@ -11,7 +11,7 @@
     <name>Ithildin</name>
 
     <!-- This description text is included in the Windows installer by default, see win-jpackage.txt -->
-    <description>Sample JavaFX Application</description>
+    <description>Elvish JavaFX dictionary application based on the Eldamo lexicon</description>
 
     <properties>
         <!-- Set this to the class with the main method for your application -->
@@ -35,11 +35,11 @@
         <!-- Set the project to UTF-8, avoiding warnings in the build logs -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
 
         <!-- Used to set both the path to find the JavaFX modules and also the versions for Maven dependencies -->
-        <javafx.version>15.0.1</javafx.version>
+        <javafx.version>16</javafx.version>
         <h2.version>1.4.200</h2.version>
 
         <!-- Replace this UUID with a custom one for your project. This ID is used by the Windows installer system
@@ -202,6 +202,15 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>15</source>
+                    <target>15</target>
+                    <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>

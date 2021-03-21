@@ -10,27 +10,29 @@ import com.j256.ormlite.table.DatabaseTable;;
 public class SimpLexicon implements Root {
 
 
+    public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
     public static final String GLOSS_FIELD_NAME = "GLOSS";
     public static final String FORM_FIELD_NAME = "FORM";
     public static final String LANGID_FIELD_NAME = "LANGUAGE_ID";
+    public static final String ENTRYTYPEID_FIELD_NAME = "ENTRYTYPE_ID";
 
-    @DatabaseField
+    @DatabaseField(columnName = ENTRYID_FIELD_NAME)
     private Integer entryId;
     @DatabaseField
     private String  mark;
-    @DatabaseField
+    @DatabaseField(columnName = FORM_FIELD_NAME)
     private String  form;
-    @DatabaseField
+    @DatabaseField(columnName = LANGID_FIELD_NAME)
     private Integer languageId;
     @DatabaseField
     private String  languagename;
-    @DatabaseField
+    @DatabaseField(columnName = GLOSS_FIELD_NAME)
     private String  gloss;
     @DatabaseField
     private String  cat;
     @DatabaseField
     private String  stem;
-    @DatabaseField
+    @DatabaseField(columnName = ENTRYTYPEID_FIELD_NAME)
     private Integer entrytypeId;
 
     protected SimpLexicon() {}

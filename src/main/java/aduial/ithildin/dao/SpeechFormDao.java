@@ -1,6 +1,5 @@
 package aduial.ithildin.dao;
 
-import aduial.ithildin.entity.Lexicon;
 import aduial.ithildin.entity.SpeechFormView;
 import aduial.ithildin.exception.SauronException;
 import com.j256.ormlite.dao.Dao;

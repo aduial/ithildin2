@@ -64,19 +64,17 @@ public class MabedController {
 
     private boolean searchGlosses = false;
 
-    private LexiconDao     lexiconDao     = new LexiconDao();
-    private SimpLexiconDao simpLexiconDao = new SimpLexiconDao();
-    private LanguageDao    languageDao    = new LanguageDao();
-    private SpeechFormDao  speechFormDao  = new SpeechFormDao();
-    private EntryNoteDao   entryNoteDao   = new EntryNoteDao();
-    private RefGlossDao    refGlossDao    = new RefGlossDao();
-    private RefDerivDao    refDerivDao    = new RefDerivDao();
-    private RefInflectDao  refInflectDao  = new RefInflectDao();
-    private RefElementDao  refElementDao  = new RefElementDao();
-    private RefCognateDao  refCognateDao  = new RefCognateDao();
-    private RefDao         refDao         = new RefDao();
+    private final LexiconDao     lexiconDao     = new LexiconDao();
+    private final SimpLexiconDao simpLexiconDao = new SimpLexiconDao();
+    private final SpeechFormDao  speechFormDao  = new SpeechFormDao();
+    private final EntryNoteDao   entryNoteDao   = new EntryNoteDao();
+    private final RefGlossDao    refGlossDao    = new RefGlossDao();
+    private final RefDerivDao    refDerivDao    = new RefDerivDao();
+    private final RefInflectDao  refInflectDao  = new RefInflectDao();
+    private final RefElementDao  refElementDao  = new RefElementDao();
+    private final RefCognateDao  refCognateDao  = new RefCognateDao();
+    private final RefDao         refDao         = new RefDao();
 
-    private SimpLexicon         selectSimpLexicon;
     private Lexicon             selectedLexicon;
     private ObservableList<Ref> refList;
 
@@ -91,7 +89,7 @@ public class MabedController {
     private boolean cogVisible = false;
 
 
-    public void display(WebView wv1, WebView wv2) {
+    public void display(WebView wv1, WebView wv2) throws SQLException, SauronException {
         this.wv1 = wv1;
         this.wv2 = wv2;
         writeContent();
@@ -99,7 +97,7 @@ public class MabedController {
 
     @FXML
     public void initialize() throws SQLException, SauronException {
-        languageDao = new LanguageDao();
+        LanguageDao languageDao = new LanguageDao();
         matchTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         populateLanguageChooser(FXCollections.observableArrayList(languageDao.getSearchLanguages(1000, 127, 127)));
 
@@ -156,11 +154,11 @@ public class MabedController {
         reallyDoSearchNow();
     }
 
-    public void keyReleased() throws SauronException {
+    public void keyReleased() throws SauronException, SQLException {
         showSelectedLexicon();
     }
 
-    public void rowClicked() throws SauronException {
+    public void rowClicked() throws SauronException, SQLException {
         showSelectedLexicon();
     }
 
@@ -169,44 +167,44 @@ public class MabedController {
     }
 
 
-    public void refToggleButtonChanged() {
+    public void refToggleButtonChanged() throws SQLException, SauronException {
         refVisible = refToggleButton.isSelected();
         writeContent();
     }
 
-    public void glsToggleButtonChanged() {
+    public void glsToggleButtonChanged() throws SQLException, SauronException {
         glsVisible = glsToggleButton.isSelected();
         writeContent();
     }
 
-    public void drvToggleButtonChanged() {
+    public void drvToggleButtonChanged() throws SQLException, SauronException {
         drvVisible = drvToggleButton.isSelected();
         writeContent();
     }
 
-    public void iflToggleButtonChanged() {
+    public void iflToggleButtonChanged() throws SQLException, SauronException {
         iflVisible = iflToggleButton.isSelected();
         writeContent();
     }
 
-    public void elmToggleButtonChanged() {
+    public void elmToggleButtonChanged() throws SQLException, SauronException {
         elmVisible = elmToggleButton.isSelected();
         writeContent();
     }
 
-    public void cogToggleButtonChanged() {
+    public void cogToggleButtonChanged() throws SQLException, SauronException {
         cogVisible = cogToggleButton.isSelected();
         writeContent();
     }
 
     private void showSelectedLexicon() throws SauronException, SQLException {
-        selectSimpLexicon = matchTable.getSelectionModel().getSelectedItem();
+        SimpLexicon selectSimpLexicon = matchTable.getSelectionModel().getSelectedItem();
         selectedLexicon = lexiconDao.findByEntryId(selectSimpLexicon.getEntryId());
         display(primaryWebView, secondaryWebView);
     }
 
     @FXML
-    private void populateMatchTable(ObservableList<SimpLexicon> simpLexiconList) throws ClassNotFoundException {
+    private void populateMatchTable(ObservableList<SimpLexicon> simpLexiconList) {
         //Set items to the userTable
         matchTable.setItems(simpLexiconList);
     }
@@ -216,16 +214,18 @@ public class MabedController {
         try {
             if (searchGlosses) {
 
-                simpLexiconList = FXCollections.observableArrayList(simpLexiconDao.findByGlossAndLangId(
-                        searchTextField.getText(),
-                        languageChooser.getValue().getId()));
+                simpLexiconList
+                        = FXCollections.observableArrayList(simpLexiconDao.findByGlossAndLangId(searchTextField.getText(),
+                                                                                                languageChooser.getValue()
+                                                                                                               .getId()));
             } else {
-                simpLexiconList = FXCollections.observableArrayList(simpLexiconDao.findByFormAndLangId(
-                        searchTextField.getText(),
-                        languageChooser.getValue().getId()));
+                simpLexiconList
+                        = FXCollections.observableArrayList(simpLexiconDao.findByFormAndLangId(searchTextField.getText(),
+                                                                                               languageChooser.getValue()
+                                                                                                              .getId()));
             }
             populateMatchTable(simpLexiconList);
-        } catch (ClassNotFoundException | SQLException | SauronException e) {
+        } catch (SQLException | SauronException e) {
             e.printStackTrace();
         }
     }
@@ -253,10 +253,10 @@ public class MabedController {
     }
 
 
-    private void writeContent() {
+    private void writeContent() throws SQLException, SauronException {
         String txt1 = writeHeadLine();
         String txt2 = writeWordNotes();
-        refList = FXCollections.observableArrayList(refDao.findById(Ref.class, selectedLexicon.getEntryId()));
+        refList = FXCollections.observableArrayList(refDao.findByEntryId(selectedLexicon.getEntryId()));
         if (refVisible) { txt1 += writeRefs(); }
         if (glsVisible) { txt1 += writeGlosses(); }
         if (drvVisible) { txt1 += writeDerivs(); }
@@ -270,47 +270,48 @@ public class MabedController {
     private String writeHeadLine() throws SQLException, SauronException {
         String txt = "<p> " + spanTag(selectedLexicon.getLangMnemonic() + ". ", 1, 14, 3, 0, "333");
         txt += spanTag(selectedLexicon.getForm() + ", ", 1, 12, 7, 1, "336");
-        txt += spanTag(speechFormDao.findByEntryId(selectedLexicon.getEntryId()).getTxt() + ". ",
-                       1,
-                       11,
-                       5,
-                       0,
-                       "000");
+        txt += spanTag(speechFormDao.findByEntryId(selectedLexicon.getEntryId()).getTxt() + ". ", 1, 11, 5, 0, "000");
         txt += spanTag("\"" + selectedLexicon.getGloss() + "\"", 2, 12, 4, 0, "555");
         txt += "</p>";
         return txt;
     }
 
-    private String writeWordNotes() {
-        String txt = "";
+    private String writeWordNotes() throws SQLException, SauronException {
+        StringBuilder txt = new StringBuilder();
         for (EntryNoteView env : entryNoteDao.findByEntryId(selectedLexicon.getEntryId())) {
-            txt += optStylePtag(env.getTxt(), 1, 11, 4, 0, "222");
+            txt.append(optStylePtag(env.getTxt(), 1, 11, 4, 0, "222"));
         }
-        return txt;
+        return txt.toString();
     }
 
     private String writeRefs() {
-        boolean rs      = false;
-        String  sources = "";
+        boolean       rs      = false;
+        StringBuilder sources = new StringBuilder();
         for (Ref ref : refList) {
             if (rs) {
-                sources += "; ";
+                sources.append("; ");
             }
-            sources += ref.getSource() + " ";
+            sources.append(ref.getSource()).append(" ");
             rs = true;
         }
         if (sources.length() == 0) {
             return "";
         } else {
-            return "<p> " + spanTag("References: ", 1, 12, 7, 0, "228") + spanTag(sources, 1, 11, 4, 0, "222") + "</p>";
+            return "<p> " + spanTag("References: ", 1, 12, 7, 0, "228") + spanTag(sources.toString(),
+                                                                                  1,
+                                                                                  11,
+                                                                                  4,
+                                                                                  0,
+                                                                                  "222") + "</p>";
         }
     }
 
-    private String writeGlosses() {
-        boolean rg      = false;
-        String  glosses = spanTag("Glosses: ", 1, 12, 7, 0, "228") + "<ul style=\"margin-top:3px;\">";
+    private String writeGlosses() throws SQLException, SauronException {
+        boolean rg = false;
+        StringBuilder glosses = new StringBuilder(spanTag("Glosses: ", 1, 12, 7, 0, "228")
+                                                  + "<ul style=\"margin-top:3px;\">");
         for (RefGlossView refGlossView : refGlossDao.findByEntryId(selectedLexicon.getEntryId())) {
-            glosses += "<li " + inline(1, 11, 4, 0, "222") + ">" + refGlossView.getRefgloss();
+            glosses.append("<li ").append(inline(1, 11, 4, 0, "222")).append(">").append(refGlossView.getRefgloss());
             rg = true;
         }
         if (rg) {
@@ -320,31 +321,26 @@ public class MabedController {
         }
     }
 
-    private String writeDerivs() {
-        boolean dvs    = false;
-        String  derivs = spanTag("Derivations: ", 1, 12, 7, 0, "228");
-        derivs += TABLE + "<tr>";
-        derivs += TH + spanTag("form ", 2, 11, 4, 2, "228") + ENDTH;
-        derivs += TH15 + spanTag("gloss(es) ", 2, 11, 4, 2, "228") + ENDTH;
-        derivs += TH + spanTag("sourc(es) ", 2, 11, 4, 2, "228") + "</th></tr>";
+    private String writeDerivs() throws SQLException, SauronException {
+        boolean       dvs    = false;
+        StringBuilder derivs = new StringBuilder(spanTag("Derivations: ", 1, 12, 7, 0, "228"));
+        derivs.append(TABLE + "<tr>");
+        derivs.append(TH).append(spanTag("form ", 2, 11, 4, 2, "228")).append(ENDTH);
+        derivs.append(TH15).append(spanTag("gloss(es) ", 2, 11, 4, 2, "228")).append(ENDTH);
+        derivs.append(TH).append(spanTag("sourc(es) ", 2, 11, 4, 2, "228")).append("</th></tr>");
 
         for (RefDerivView rdv : refDerivDao.findByEntryId(selectedLexicon.getEntryId())) {
-            derivs += "<tr>";
-            derivs += TD
-                      + spanTag(rdv.getForm(), 2, 12, 4, 1, "2B2")
-                      + ENDTD
-                      + TD
-                      + spanTag(rdv.getGlosses(),
-                                12,
-                                11,
-                                4,
-                                0,
-                                "B22")
-                      + ENDTD
-                      + TD
-                      + spanTag(rdv.getSources(), 1, 12, 4, 0, "555")
-                      + ENDTD;
-            derivs += "</tr>";
+            derivs.append("<tr>");
+            derivs.append(TD)
+                  .append(spanTag(rdv.getForm(), 2, 12, 4, 1, "2B2"))
+                  .append(ENDTD)
+                  .append(TD)
+                  .append(spanTag(rdv.getGlosses(), 12, 11, 4, 0, "B22"))
+                  .append(ENDTD)
+                  .append(TD)
+                  .append(spanTag(rdv.getSources(), 1, 12, 4, 0, "555"))
+                  .append(ENDTD);
+            derivs.append("</tr>");
             dvs = true;
         }
         if (dvs) {
@@ -354,81 +350,80 @@ public class MabedController {
         }
     }
 
-    private String writeInflects() {
-        boolean ifl      = false;
-        String  inflects = spanTag("Inflections: ", 1, 12, 7, 0, "228");
-        inflects += TABLE + "<tr>";
-        inflects += TH + spanTag("form(s) ", 2, 11, 4, 2, "228") + ENDTH;
-        inflects += TH15 + spanTag("speech ", 2, 11, 4, 2, "228") + ENDTH;
-        inflects += TH10 + spanTag("gloss ", 2, 11, 4, 2, "228") + ENDTH;
-        inflects += TH + spanTag("sourc(es) ", 2, 11, 4, 2, "228") + "</th></tr>";
+    private String writeInflects() throws SQLException, SauronException {
+        boolean       ifl      = false;
+        StringBuilder inflects = new StringBuilder(spanTag("Inflections: ", 1, 12, 7, 0, "228"));
+        inflects.append(TABLE + "<tr>");
+        inflects.append(TH).append(spanTag("form(s) ", 2, 11, 4, 2, "228")).append(ENDTH);
+        inflects.append(TH15).append(spanTag("speech ", 2, 11, 4, 2, "228")).append(ENDTH);
+        inflects.append(TH10).append(spanTag("gloss ", 2, 11, 4, 2, "228")).append(ENDTH);
+        inflects.append(TH).append(spanTag("sourc(es) ", 2, 11, 4, 2, "228")).append("</th></tr>)");
 
         for (RefInflectView refInflect : refInflectDao.findByEntryId(selectedLexicon.getEntryId())) {
             String gloss = refInflect.getGloss();
-            inflects += "<tr>";
-            inflects += TD
-                        + spanTag(refInflect.getForm(), 2, 12, 4, 1, "2B2")
-                        + ENDTD
-                        + TD
-                        + spanTag(refInflect.getGrammar(), 2, 12, 4, 0, "22B")
-                        + ENDTD
-                        + TD
-                        + (gloss != null ? spanTag(refInflect.getGloss(), 12, 11, 4, 0, "B22") : "")
-                        + ENDTD
-                        + TD
-                        + spanTag(refInflect.getSources(), 1, 12, 4, 0, "555")
-                        + ENDTD;
-            inflects += "</tr>";
+            inflects.append("<tr>").append(TD);
+            inflects.append(spanTag(refInflect.getForm(), 2, 12, 4, 1, "2B2")).append(ENDTD).append(TD);
+            inflects.append(spanTag(refInflect.getGrammar(), 2, 12, 4, 0, "22B")).append(ENDTD).append(TD);
+            inflects.append((gloss != null ? spanTag(gloss, 12, 11, 4, 0, "B22") : "")).append(ENDTD).append(TD);
+            inflects.append(spanTag(refInflect.getSources(), 1, 12, 4, 0, "555")).append(ENDTD).append("</tr>");
             ifl = true;
-        }
-        if (ifl) {
-            return inflects + "</table><br>";
+        } if (ifl) {
+            inflects.append("</table><br>");
+            return inflects.toString();
         } else {
             return "";
         }
     }
 
-    private String writeElements() {
+    private String writeElements() throws SQLException, SauronException {
         boolean elm      = false;
-        String  gloss, sources;
-        String  elements = spanTag("Elements: ", 1, 12, 7, 0, "228");
-        elements += "<ul style='margin-top:3px;'>";
+        String  gloss;
+        String  sources;
+        StringBuilder  elements = new StringBuilder(spanTag("Elements: ", 1, 12, 7, 0, "228"));
+        elements.append("<ul style='margin-top:3px;'>");
+
         for (RefElementView refElement : refElementDao.findByEntryId(selectedLexicon.getEntryId())) {
-            gloss = null == refElement.getGloss() ? "" : refElement.getGloss();
-            sources = null == refElement.getSources() ? "" : refElement.getSources();
-            elements += "<li>";
-            elements += spanTag(refElement.getLang() + ". ", 2, 11, 4, 0, "222");
-            elements += spanTag(refElement.getForm() + " ", 2, 11, 4, 1, "228");
-            if (!gloss.equalsIgnoreCase("")) { elements += spanTag(refElement.getGloss() + " ", 2, 11, 4, 0, "222"); }
-            if (!sources.equalsIgnoreCase("")) {
-                elements += spanTag(refElement.getSources() + " ", 1, 11, 4, 0, "222");
+            gloss = (null == refElement.getGloss() ? "" : refElement.getGloss());
+            sources = (null == refElement.getSources() ? "" : refElement.getSources());
+            elements.append("<li>");
+            elements.append(spanTag(refElement.getLang() + ". ", 2, 11, 4, 0, "222"));
+            elements.append(spanTag(refElement.getForm() + " ", 2, 11, 4, 1, "228"));
+            if (!gloss.equalsIgnoreCase("")) {
+                elements.append(spanTag(refElement.getGloss() + " ", 2, 11, 4, 0, "222"));
             }
-            elements += "</li>";
+            if (!sources.equalsIgnoreCase("")) {
+                elements.append(spanTag(refElement.getSources() + " ", 1, 11, 4, 0, "222"));
+            }
+            elements.append("</li>");
             elm = true;
         }
         if (elm) {
-            return elements + "</ul><br>";
+            elements.append("</ul><br>");
+            return elements.toString();
         } else {
             return "";
         }
     }
 
-    private String writeCognates() {
+    private String writeCognates() throws SQLException, SauronException {
         boolean cog      = false;
-        String  gloss, sources;
-        String  cognates = spanTag("Cognates: ", 1, 12, 7, 0, "228");
-        cognates += "<ul style='margin-top:3px;'>";
+        String  gloss;
+        String sources;
+        StringBuilder  cognates = new StringBuilder(spanTag("Cognates: ", 1, 12, 7, 0, "228"));
+        cognates.append("<ul style='margin-top:3px;'>");
         for (RefCognateView refCognate : refCognateDao.findByEntryId(selectedLexicon.getEntryId())) {
-            gloss = null == refCognate.getGloss() ? "" : refCognate.getGloss();
-            sources = null == refCognate.getSources() ? "" : refCognate.getSources();
-            cognates += "<li>";
-            cognates += spanTag(refCognate.getLang() + ". ", 2, 11, 4, 0, "222");
-            cognates += spanTag(refCognate.getForm() + " ", 2, 11, 4, 1, "228");
-            if (!gloss.equalsIgnoreCase("")) { cognates += spanTag(refCognate.getGloss() + " ", 2, 11, 4, 0, "222"); }
-            if (!sources.equalsIgnoreCase("")) {
-                cognates += spanTag(refCognate.getSources() + " ", 1, 11, 4, 0, "222");
+            gloss = (null == refCognate.getGloss() ? "" : refCognate.getGloss());
+            sources = (null == refCognate.getSources() ? "" : refCognate.getSources());
+            cognates.append("<li>");
+            cognates.append(spanTag(refCognate.getLang() + ". ", 2, 11, 4, 0, "222"));
+            cognates.append(spanTag(refCognate.getForm() + " ", 2, 11, 4, 1, "228"));
+            if (!gloss.equalsIgnoreCase("")) {
+                cognates.append(spanTag(refCognate.getGloss() + " ", 2, 11, 4, 0, "222"));
             }
-            cognates += "</li>";
+            if (!sources.equalsIgnoreCase("")) {
+                cognates.append(spanTag(refCognate.getSources() + " ", 1, 11, 4, 0, "222"));
+            }
+            cognates.append("</li>");
             cog = true;
         }
         if (cog) {

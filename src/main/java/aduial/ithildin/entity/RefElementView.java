@@ -7,65 +7,65 @@ import com.j256.ormlite.table.DatabaseTable;;
  * Created by luthien on 18/02/2021.
  */
 @DatabaseTable(tableName = "REFELEMENTVIEW")
-public class RefElementView{
+public class RefElementView implements Root {
 
-  public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
+    public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
 
-  @DatabaseField
-  private Integer   entryId;
-  @DatabaseField
-  private String lang;
-  @DatabaseField
-  private String form;
-  @DatabaseField
-  private String gloss;
-  @DatabaseField
-  private String sources;
+    @DatabaseField(columnName = ENTRYID_FIELD_NAME)
+    private Integer entryId;
+    @DatabaseField
+    private String  lang;
+    @DatabaseField
+    private String  form;
+    @DatabaseField
+    private String  gloss;
+    @DatabaseField
+    private String  sources;
 
-  protected RefElementView() {}
+    protected RefElementView() {}
 
-  public Integer getEntryId() {
-    return entryId;
-  }
+    public Integer getEntryId() {
+        return entryId;
+    }
 
-  public void setEntryId(Integer id) {
-    this.entryId = id;
-  }
-
-
-  public String getLang() {
-    return lang;
-  }
-
-  public void setLang(String lang) {
-    this.lang = lang;
-  }
+    public void setEntryId(Integer id) {
+        this.entryId = id;
+    }
 
 
-  public String getForm() {
-    return form;
-  }
+    public String getLang() {
+        return lang;
+    }
 
-  public void setForm(String form) {
-    this.form = form;
-  }
-
-
-  public String getGloss() {
-    return gloss;
-  }
-
-  public void setGloss(String gloss) {
-    this.gloss = gloss;
-  }
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
 
 
-  public String getSources() {
-    return sources;
-  }
+    public String getForm() {
+        return form;
+    }
 
-  public void setSources(String sources) {
-    this.sources = sources;
-  }
+    public void setForm(String form) {
+        this.form = form;
+    }
+
+
+    public String getGloss() {
+        return gloss;
+    }
+
+    public void setGloss(String gloss) {
+        this.gloss = gloss;
+    }
+
+
+    public String getSources() {
+        return sources;
+    }
+
+    public void setSources(String sources) {
+        this.sources = sources;
+    }
 
 }

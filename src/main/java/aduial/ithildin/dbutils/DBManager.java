@@ -24,7 +24,7 @@ public class DBManager{
 
     private static void createConnectionSource() {
         try {
-            connectionSource = new JdbcConnectionSource(JDBC_DRIVER_H2);
+            connectionSource = new JdbcConnectionSource(JDBC_DRIVER_H2, USER, PASS);
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage());
         }

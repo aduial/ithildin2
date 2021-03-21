@@ -5,30 +5,13 @@
  */
 package aduial.ithildin.controller;
 
-import aduial.ithildin.model.LexiconDAO;
-import javafx.fxml.FXML;
-import javafx.collections.ObservableList;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ComboBox;
-import java.sql.SQLException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import javafx.util.StringConverter;
-
 import aduial.ithildin.entity.Language;
-import aduial.ithildin.entity.Lexicon;
 import aduial.ithildin.entity.SimpLexicon;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.TableRow;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.web.WebView;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.concurrent.Executor;
 
 /**
  *
@@ -42,13 +25,13 @@ public class EchadController {
   @FXML
   private TableView<SimpLexicon> matchTable;
   @FXML
-  private TableColumn<Simplexicon, Number> idColumn;
+  private TableColumn<SimpLexicon, Number> idColumn;
   @FXML
-  private TableColumn<Simplexicon, String> formColumn;
+  private TableColumn<SimpLexicon, String> formColumn;
   @FXML
-  private TableColumn<Simplexicon, String> glossColumn;
+  private TableColumn<SimpLexicon, String> glossColumn;
   @FXML
-  private TableColumn<Simplexicon, Number> entrytypeIdColumn;
+  private TableColumn<SimpLexicon, Number> entrytypeIdColumn;
   @FXML
   private ToggleButton glossToggleButton;
   @FXML
@@ -64,11 +47,12 @@ public class EchadController {
   @FXML
   private void initialize() {
     matchTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    
-    idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-    formColumn.setCellValueFactory(cellData -> cellData.getValue().formProperty());
-    glossColumn.setCellValueFactory(cellData -> cellData.getValue().glossProperty());
-    entrytypeIdColumn.setCellValueFactory(cellData -> cellData.getValue().entrytypeIdProperty());
+
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("entryId"));
+    formColumn.setCellValueFactory(new PropertyValueFactory<>("form"));
+    glossColumn.setCellValueFactory(new PropertyValueFactory<>("gloss"));
+    entrytypeIdColumn.setCellValueFactory(new PropertyValueFactory<>("entryTypeId"));
+
     idColumn.setVisible(false);
     entrytypeIdColumn.setVisible(false);
   }

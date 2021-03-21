@@ -13,17 +13,17 @@ public class LanguageDao extends CommonDao {
         super();
     }
 
-    public List<Language> getSearchLanguages (Integer id, Integer idIsNot, Integer parentId ) throws SauronException, SQLException {
+    public List<Language> getSearchLanguages (Integer idBelow, Integer idNot, Integer parentNot ) throws SauronException, SQLException {
         Dao<Language, Integer>          langDao      = getDao(Language.class);
         return langDao.queryBuilder()
                       .where()
-                      .eq(Language.ID_FIELD_NAME, id)
+                      .lt(Language.ID_FIELD_NAME, idBelow)
                       .and()
-                      .ne(Language.ID_FIELD_NAME, idIsNot)
+                      .ne(Language.ID_FIELD_NAME, idNot)
                       .and()
                       .isNotNull(Language.PARENTID_FIELD_NAME)
                       .and()
-                      .ne(Language.PARENTID_FIELD_NAME, parentId)
+                      .ne(Language.PARENTID_FIELD_NAME, parentNot)
                 .query();
     }
 }

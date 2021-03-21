@@ -10,29 +10,39 @@ import com.j256.ormlite.table.DatabaseTable;;
 @DatabaseTable(tableName = "REF")
 public class Ref implements Root {
 
+  public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
+  public static final String FORMID_FIELD_NAME = "FORM_ID";
+  public static final String GLOSSID_FIELD_NAME = "GLOSS_ID";
+  public static final String LANGUAGEID_FIELD_NAME = "LANGUAGE_ID";
+  public static final String SOURCEID_FIELD_NAME = "SOURCE_ID";
+  public static final String RULEFROMFORMID_FIELD_NAME = "RULE_FROMFORM_ID";
+  public static final String RULERLFORMID_FIELD_NAME = "RULE_RLFORM_ID";
+  public static final String RULERULEFORMID_FIELD_NAME = "RULE_RULEFORM_ID";
+  public static final String ENTRYTYPEID_FIELD_NAME = "ENTRYTYPE_ID";
+
   @DatabaseField(id = true)
   private Integer id;
-  @DatabaseField
+  @DatabaseField(columnName = ENTRYID_FIELD_NAME)
   private Integer entryId;
-  @DatabaseField
+  @DatabaseField(columnName = FORMID_FIELD_NAME)
   private Integer formId;
-  @DatabaseField
+  @DatabaseField(columnName = GLOSSID_FIELD_NAME)
   private Integer glossId;
-  @DatabaseField
+  @DatabaseField(columnName = LANGUAGEID_FIELD_NAME)
   private Integer languageId;
-  @DatabaseField
+  @DatabaseField(columnName = SOURCEID_FIELD_NAME)
   private Integer sourceId;
   @DatabaseField
   private String mark;
-  @DatabaseField
+  @DatabaseField(columnName = RULEFROMFORMID_FIELD_NAME)
   private Integer ruleFromformId;
-  @DatabaseField
+  @DatabaseField(columnName = RULERLFORMID_FIELD_NAME)
   private Integer ruleRlformId;
-  @DatabaseField
+  @DatabaseField(columnName = RULERULEFORMID_FIELD_NAME)
   private Integer ruleRuleformId;
   @DatabaseField
   private Integer ordering;
-  @DatabaseField
+  @DatabaseField(columnName = ENTRYTYPEID_FIELD_NAME)
   private Integer entrytypeId;
   @DatabaseField
   private String source;

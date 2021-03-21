@@ -14,7 +14,7 @@
             prefHeight="600.0"
             prefWidth="900.0"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="aduial.ithildin.controller.Henneth">
+            fx:controller="aduial.ithildin.controller.HennethController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>

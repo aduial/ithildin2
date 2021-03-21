@@ -11,7 +11,7 @@ public class SpeechFormView implements Root {
 
   public static final String ENTRYID_FIELD_NAME = "ENTRY_ID";
 
-  @DatabaseField
+  @DatabaseField(columnName = ENTRYID_FIELD_NAME)
   private Integer entryId;
   @DatabaseField
   private String txt;

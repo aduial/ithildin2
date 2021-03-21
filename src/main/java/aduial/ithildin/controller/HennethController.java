@@ -3,12 +3,8 @@ package aduial.ithildin.controller;
 import aduial.ithildin.Ithildin;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
-import aduial.ithildin.Main;
-import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.VBox;
 
 /**
  * @author Lúthien
