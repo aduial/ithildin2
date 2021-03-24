@@ -171,8 +171,7 @@
                         <configuration>
                             <toolName>jlink</toolName>
                             <removeDirectories>${project.build.directory}/jvm-image/</removeDirectories>
-                            <modulePath>${project.basedir}/${platform}-javafx/javafx-jmods-${javafx.version}/${path.separator}${project.basedir}/jmods/
-                            </modulePath>
+                            <modulePath>${project.basedir}/${platform}-javafx/javafx-jmods-${javafx.version}/</modulePath>
                             <addModules>${jvm.modules}</addModules>
                             <output>${project.build.directory}/jvm-image</output>
                             <args>
