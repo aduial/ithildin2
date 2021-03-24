@@ -171,7 +171,7 @@
                         <configuration>
                             <toolName>jlink</toolName>
                             <removeDirectories>${project.build.directory}/jvm-image/</removeDirectories>
-                            <modulePath>${project.basedir}/${platform}-javafx/javafx-jmods-${javafx.version}/:/Library/Java/JavaVirtualMachines/adoptopenjdk-16.jdk/Contents/Home/jmods/
+                            <modulePath>${project.basedir}/${platform}-javafx/javafx-jmods-${javafx.version}/${path.separator}${project.basedir}/jmods/
                             </modulePath>
                             <addModules>${jvm.modules}</addModules>
                             <output>${project.build.directory}/jvm-image</output>
