@@ -30,7 +30,7 @@
         <!-- This property is used to specify the modules included in the (custom) JVM image. -->
         <!-- Reminder: javafx.web (the embedded browser component) is not included in this project by default due
         to GitHub template size restrictions. You can download the full SDK from https://openjfx.io -->
-        <jvm.modules>javafx.media,javafx.controls,javafx.fxml,javafx.web</jvm.modules>
+        <jvm.modules>javafx.media,javafx.controls,javafx.fxml,javafx.web,java.logging,java.sql</jvm.modules>
 
         <!-- Set the project to UTF-8, avoiding warnings in the build logs -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -101,6 +101,10 @@
                 <filtering>true</filtering>
                 <targetPath>${project.build.directory}/packaging</targetPath>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- <directory>${project.basedir}src/main/resources</directory> -->
+            </resource>
         </resources>
 
         <plugins>
@@ -167,7 +171,7 @@
                         <configuration>
                             <toolName>jlink</toolName>
                             <removeDirectories>${project.build.directory}/jvm-image/</removeDirectories>
-                            <modulePath>${project.basedir}/${platform}-javafx/javafx-jmods-${javafx.version}/
+                            <modulePath>${project.basedir}/${platform}-javafx/javafx-jmods-${javafx.version}/:/Library/Java/JavaVirtualMachines/adoptopenjdk-16.jdk/Contents/Home/jmods/
                             </modulePath>
                             <addModules>${jvm.modules}</addModules>
                             <output>${project.build.directory}/jvm-image</output>
@@ -195,6 +199,7 @@
                         </goals>
                         <configuration>
                             <toolName>jpackage</toolName>
+<!--                            <type>app-image</type>-->
                             <removeDirectories>${project.build.directory}/installer-work</removeDirectories>
                             <args>@${project.build.directory}/packaging/${platform}-jpackage.txt</args>
                         </configuration>

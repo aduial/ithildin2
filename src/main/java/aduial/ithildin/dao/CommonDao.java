@@ -2,7 +2,7 @@ package aduial.ithildin.dao;
 
 import aduial.ithildin.dbutils.DBManager;
 import aduial.ithildin.entity.Root;
-import aduial.ithildin.util.FxmlUtils;
+import aduial.ithildin.util.Utilities;
 import aduial.ithildin.exception.SauronException;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -28,7 +28,7 @@ public abstract class CommonDao {
             return DaoManager.createDao(connectionSource, cls);
         } catch (SQLException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.get.dao"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.get.dao"));
         } finally {
             this.closeDbConnection();
         }
@@ -40,7 +40,7 @@ public abstract class CommonDao {
             dao.createOrUpdate((T) root);
         } catch (SQLException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.create.update"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.create.update"));
         } finally {
             this.closeDbConnection();
         }
@@ -52,7 +52,7 @@ public abstract class CommonDao {
             dao.refresh((T) root);
         } catch (SQLException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.refresh"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.refresh"));
         } finally {
             this.closeDbConnection();
         }
@@ -64,7 +64,7 @@ public abstract class CommonDao {
             dao.delete((T) root);
         } catch (SQLException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.delete"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.delete"));
         } finally {
             this.closeDbConnection();
         }
@@ -76,7 +76,7 @@ public abstract class CommonDao {
             dao.deleteById((I) id);
         } catch (SQLException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.delete"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.delete"));
         } finally {
             this.closeDbConnection();
         }
@@ -88,7 +88,7 @@ public abstract class CommonDao {
             return dao.queryForId((I) id);
         } catch (SQLException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.not.found"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.not.found"));
         } finally {
             this.closeDbConnection();
         }
@@ -100,7 +100,7 @@ public abstract class CommonDao {
             return dao.queryForAll();
         } catch (SQLException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.not.found.all"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.not.found.all"));
         } finally {
             this.closeDbConnection();
         }
@@ -111,7 +111,7 @@ public abstract class CommonDao {
             this.connectionSource.close();
         } catch (IOException e) {
             LOGGER.warn(e.getCause().getMessage());
-            throw new SauronException(FxmlUtils.getResourceBundle().getString("error.get.dao"));
+            throw new SauronException(Utilities.getResourceBundle().getString("error.get.dao"));
         }
     }
 }

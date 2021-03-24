@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 public class DialogsUtils {
 
-    static ResourceBundle bundle = FxmlUtils.getResourceBundle();
+    static ResourceBundle bundle = Utilities.getResourceBundle();
 
     public static void dialogAboutApp(){
         Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);

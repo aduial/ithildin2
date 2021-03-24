@@ -3,6 +3,7 @@ package aduial.ithildin.util;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 /**
  * Created by luthien on 20/03/2021.
@@ -14,5 +15,9 @@ public class Utilities {
 
     public static LocalDate convertToLocalDate(Date date){
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public static ResourceBundle getResourceBundle(){
+        return ResourceBundle.getBundle("bundles.messages");
     }
 }
